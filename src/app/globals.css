@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+/* colors */
+  --color-grey: #4A4A49;
+  --color-pink: #D9224C;
+  --color-american-blue: #3E3F66;
+  --color-light-grey: #CED4DA;
+  --color-light-grey-2:#DFDAF3;
+  --color-light-grey-3:#F6F4FE;
+  --color-light-grey-4:#D4D2DD;
+  --color-light-pink:#FCDDE9;
+  --color-light-blue:#D8FDFF;
+  --color-light-yellow:#F9E8CD;
+  --color-diamond:#C5F5F8;
+  --color-orange:#FC9400;
+
+  /* shadow  */
+  --shadow-card:0px 4px 30px 0px #EDE9FE;
+  --shadow-pink:0px 4px 10px 0px #CA97E4;
+  
+  /* fonts */
+  --leading-base:27.2px;
+  --font-poppins:var(--font-poppins);
+  --breakpoint-desktop: 1440px;
+
+}
+@layer utilities {
+  .bg-pink-gradient {
+    background: linear-gradient(104.47deg, #D9224C 8.42%, #4A4A49 79.77%);
+  }
+}
+
+
+
+
+.MainHeading {
+  @apply text-grey  text-2xl font-bold  xl:text-[40px] xl:leading-12
+} 
+
+.MyContainer {
+  width: 90%;
+  max-width: 1440px;
+  box-sizing: border-box;
+  margin: auto;
+}
+.MainDescription{
+  @apply text-american-blue mx-auto max-w-[529px] pt-2 text-center
+}
