@@ -232,7 +232,7 @@ export default function Home() {
       {/* NAV */}
       <nav className="kc-nav">
         <a href="#" className="kc-logo">Kera<span>chrom</span><sup>ITALY®</sup></a>
-        <a href="#download" className="kc-nav-cta">Inizia gratis</a>
+        <a href="https://staging.d2bhfx46t69ao9.amplifyapp.com/" target="_blank" rel="noopener noreferrer" className="kc-nav-cta">Inizia gratis</a>
       </nav>
 
       {/* HERO */}
@@ -242,7 +242,7 @@ export default function Home() {
         <h1 className="kc-h1">Trasforma una foto<br/>in un ricordo <em>eterno</em></h1>
         <p className="kc-hero-desc">Con Kerachrom crei fotoceramiche e stampe commemorative di alta qualità direttamente dal tuo smartphone — in pochi minuti, senza competenze tecniche.</p>
         <div className="kc-hero-actions">
-          <a href="#download" className="kc-btn-main">Crea il tuo primo progetto</a>
+          <a href="https://staging.d2bhfx46t69ao9.amplifyapp.com/" target="_blank" rel="noopener noreferrer" className="kc-btn-main">Crea il tuo primo progetto</a>
           <a href="#app" className="kc-btn-ghost">Guarda come funziona</a>
         </div>
         <div className="kc-trust">
