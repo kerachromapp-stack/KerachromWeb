@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kerachrom Italy® — Fotoceramica Professionale</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #f0f0ee;
+    --bg-soft:   #e8e8e5;
+    --bg-card:   #ffffff;
+    --black:     #111111;
+    --black-mid: #2a2a2a;
+    --red:       #9B1B30;
+    --red-light: #b52238;
+    --red-pale:  rgba(155,27,48,0.08);
+    --gray:      #666666;
+    --gray-soft: #999999;
+    --border:    rgba(0,0,0,0.1);
+    --border-red:rgba(155,27,48,0.25);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--black);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top:0; left:0; right:0;
+    z-index: 100;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(240,240,238,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--black);
+    text-decoration: none;
+    display: flex;
+    align-items: baseline;
+    gap: 1px;
+  }
+  .logo span { color: var(--red); }
+  .logo sup {
+    font-size: 8px;
+    color: var(--gray-soft);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    margin-left: 2px;
+  }
+  .nav-cta {
+    background: var(--red);
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.3s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .nav-cta:hover { background: var(--red-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 110px 24px 56px;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  .hero-line {
+    position: absolute;
+    top: 0; bottom: 0;
+    right: 28%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--border), transparent);
+    display: none;
+  }
+  .hero-accent {
+    position: absolute;
+    top: 80px; right: 0;
+    width: 40vw;
+    height: 60vh;
+    background: linear-gradient(135deg, var(--red-pale) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: up 0.9s ease 0.1s forwards;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 24px; height: 1px;
+    background: var(--red);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 10vw, 60px);
+    font-weight: 300;
+    line-height: 1.07;
+    color: var(--black);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: up 0.9s ease 0.25s forwards;
+  }
+  h1 em { font-style: italic; color: var(--red); }
+
+  .hero-desc {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--gray);
+    max-width: 400px;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: up 0.9s ease 0.4s forwards;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    opacity: 0;
+    animation: up 0.9s ease 0.55s forwards;
+  }
+  .btn-main {
+    background: var(--red);
+    color: #fff;
+    padding: 17px 28px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 2px;
+    text-align: center;
+    transition: background 0.3s;
+    font-family: 'DM Sans', sans-serif;
+    display: block;
+  }
+  .btn-main:hover { background: var(--red-light); }
+  .btn-ghost {
+    border: 1.5px solid var(--black);
+    color: var(--black);
+    padding: 17px 28px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 400;
+    text-decoration: none;
+    border-radius: 2px;
+    text-align: center;
+    transition: border-color 0.3s, color 0.3s;
+    font-family: 'DM Sans', sans-serif;
+    display: block;
+  }
+  .btn-ghost:hover { border-color: var(--red); color: var(--red); }
+
+  .trust {
+    margin-top: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    opacity: 0;
+    animation: up 0.9s ease 0.7s forwards;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    color: var(--gray);
+  }
+  .trust-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--red);
+    flex-shrink: 0;
+  }
+
+  /* ── STATS ── */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    background: var(--black);
+    border-top: 3px solid var(--red);
+  }
+  .stat {
+    padding: 28px 16px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    color: var(--red);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-l {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #888;
+    line-height: 1.5;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 72px 24px; }
+
+  .sec-tag {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sec-tag::before {
+    content: '';
+    display: block;
+    width: 20px; height: 1px;
+    background: var(--red);
+    flex-shrink: 0;
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 7vw, 44px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--black);
+    margin-bottom: 16px;
+  }
+  h2 em { font-style: italic; color: var(--red); }
+
+  .sec-text {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--gray);
+    margin-bottom: 12px;
+  }
+
+  /* ── COME FUNZIONA ── */
+  .how { background: var(--black); }
+  .how .sec-tag { color: var(--red); }
+  .how .sec-tag::before { background: var(--red); }
+  .how h2 { color: #f0f0ee; }
+  .how .sec-text { color: #888; }
+
+  .how-steps {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .how-step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.3s;
+  }
+  .how-step:last-child { border-bottom: none; }
+  .how-step:hover { background: rgba(155,27,48,0.06); }
+  .how-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 300;
+    color: var(--red);
+    line-height: 1;
+    min-width: 30px;
+  }
+  .how-step h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 4px;
+    color: #f0f0ee;
+  }
+  .how-step p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: #888;
+  }
+
+  /* ── FUNZIONALITÀ ── */
+  .features { background: var(--bg-soft); }
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 40px;
+  }
+  .feat {
+    background: var(--bg-card);
+    padding: 24px 20px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .feat:hover { border-bottom-color: var(--red); }
+  .feat-icon {
+    font-size: 20px;
+    margin-bottom: 10px;
+    display: block;
+    color: var(--red);
+  }
+  .feat h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 400;
+    margin-bottom: 6px;
+    color: var(--black);
+  }
+  .feat p {
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--gray);
+  }
+
+  /* ── PRODOTTI ── */
+  .products { background: var(--bg); }
+  .products-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 40px;
+  }
+  .product {
+    background: var(--bg-card);
+    padding: 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    border-left: 3px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .product:hover { border-left-color: var(--red); }
+  .product-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--red);
+    letter-spacing: 0.1em;
+    min-width: 26px;
+    padding-top: 4px;
+  }
+  .product-tag {
+    display: inline-block;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red);
+    border: 1px solid var(--border-red);
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-bottom: 6px;
+  }
+  .product h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 6px;
+    color: var(--black);
+  }
+  .product p {
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--gray);
+  }
+
+  /* ── ORDINI ── */
+  .orders { background: var(--bg-soft); }
+  .orders-flow {
+    margin-top: 40px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    background: var(--bg-card);
+  }
+  .order-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .order-row:last-child { border-bottom: none; }
+  .order-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-pending  { background: #f59e0b; }
+  .dot-working  { background: #3b82f6; }
+  .dot-shipped  { background: #8b5cf6; }
+  .dot-done     { background: #22c55e; }
+  .order-label  { color: var(--black); font-weight: 500; min-width: 110px; font-size: 13px; }
+  .order-desc   { color: var(--gray); font-size: 12px; }
+
+  /* ── AUDIENCE ── */
+  .audience { background: var(--black); }
+  .audience .sec-tag { color: var(--red); }
+  .audience .sec-tag::before { background: var(--red); }
+  .audience h2 { color: #f0f0ee; }
+  .audience .sec-text { color: #888; }
+
+  .audience-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 40px;
+  }
+  .aud-card {
+    background: #1a1a1a;
+    padding: 28px 24px;
+    border-left: 3px solid transparent;
+    transition: border-color 0.3s;
+  }
+  .aud-card:hover { border-left-color: var(--red); }
+  .aud-tag {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .aud-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    margin-bottom: 8px;
+    color: #f0f0ee;
+  }
+  .aud-card p {
+    font-size: 13px;
+    line-height: 1.75;
+    color: #888;
+  }
+  .aud-pills {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .aud-pill {
+    font-size: 10px;
+    color: #888;
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  /* ── DOWNLOAD ── */
+  .download {
+    background: var(--bg);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .download-inner { position: relative; z-index: 1; }
+  .download .sec-tag { justify-content: center; }
+  .download h2 { margin-bottom: 14px; }
+  .download .sec-text { margin-bottom: 36px; max-width: 360px; margin-left: auto; margin-right: auto; }
+
+  .store-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .store-btn {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg-card);
+    border: 1.5px solid var(--border);
+    color: var(--black);
+    padding: 15px 22px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: border-color 0.3s;
+  }
+  .store-btn:hover { border-color: var(--red); }
+  .store-icon { font-size: 24px; }
+  .store-text { text-align: left; }
+  .store-text small {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray-soft);
+    margin-bottom: 1px;
+  }
+  .store-text strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 400;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--black);
+  }
+
+  .pricing-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--gray);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 2px;
+    background: var(--bg-card);
+  }
+  .pricing-note b { color: var(--red); font-weight: 500; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    padding: 36px 24px;
+    border-top: 3px solid var(--red);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #f0f0ee;
+    text-decoration: none;
+  }
+  .footer-logo span { color: var(--red); }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: center;
+  }
+  .footer-links a {
+    color: #666;
+    text-decoration: none;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--red); }
+  footer p { font-size: 10px; color: #444; letter-spacing: 0.05em; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes up {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* ── DESKTOP ── */
+  @media (min-width: 768px) {
+    nav { padding: 20px 56px; }
+    .hero { padding: 140px 56px 80px; }
+    .hero-line { display: block; }
+    .hero-actions { flex-direction: row; }
+    .btn-main, .btn-ghost { display: inline-block; }
+    section { padding: 96px 56px; }
+    .stat { padding: 44px; }
+    .stat-n { font-size: 48px; }
+    .stat-l { font-size: 10px; }
+    .how-steps { display: grid; grid-template-columns: 1fr 1fr; }
+    .how-step:nth-child(odd)  { border-right: 1px solid rgba(255,255,255,0.06); }
+    .how-step:nth-child(3),
+    .how-step:nth-child(4)    { border-bottom: none; }
+    .features-grid { grid-template-columns: repeat(3,1fr); }
+    .products-list { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .audience-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+    .store-btns { flex-direction: row; justify-content: center; }
+    footer { flex-direction: row; justify-content: space-between; padding: 36px 56px; text-align: left; }
+    .footer-links { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Kera<span>chrom</span><sup>ITALY®</sup></a>
+  <a href="#download" class="nav-cta">Inizia gratis</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-line"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-tag">Fotoceramica professionale digitale</div>
+  <h1>Trasforma una foto<br>in un ricordo <em>eterno</em></h1>
+  <p class="hero-desc">Con Kerachrom crei fotoceramiche e stampe commemorative di alta qualità direttamente dal tuo smartphone — in pochi minuti, senza competenze tecniche.</p>
+  <div class="hero-actions">
+    <a href="#download" class="btn-main">Crea il tuo primo progetto</a>
+    <a href="#come-funziona" class="btn-ghost">Scopri come funziona</a>
+  </div>
+  <div class="trust">
+    <div class="trust-item"><div class="trust-dot"></div>iOS · Android · Web</div>
+    <div class="trust-item"><div class="trust-dot"></div>Intelligenza artificiale integrata</div>
+    <div class="trust-item"><div class="trust-dot"></div>Pagamento sicuro via PayPal</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-n">3</div>
+    <div class="stat-l">Piattaforme<br>disponibili</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">AI</div>
+    <div class="stat-l">Miglioramento<br>foto integrato</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">€70</div>
+    <div class="stat-l">Prezzi<br>a partire da</div>
+  </div>
+</div>
+
+<!-- COME FUNZIONA -->
+<section id="come-funziona" class="how">
+  <div class="sec-tag">Il processo</div>
+  <h2>Dal telefono alla<br>ceramica in <em>5 passi</em></h2>
+  <p class="sec-text">Kerachrom guida l'utente passo dopo passo. Non serve alcuna esperienza — l'app fa il lavoro difficile per te.</p>
+  <div class="how-steps">
+    <div class="how-step">
+      <div class="how-n">1</div>
+      <div>
+        <h4>Carica la foto</h4>
+        <p>Seleziona dall'album del telefono o dal computer. L'app accetta qualsiasi formato.</p>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-n">2</div>
+      <div>
+        <h4>Ritaglia e migliora</h4>
+        <p>Ruota, ritaglia e migliora automaticamente la qualità con l'intelligenza artificiale integrata.</p>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-n">3</div>
+      <div>
+        <h4>Personalizza sfondo e stile</h4>
+        <p>Scegli tra decine di sfondi (mare, naturali, colori) e cambia lo stile dell'abbigliamento.</p>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-n">4</div>
+      <div>
+        <h4>Aggiungi testo e date</h4>
+        <p>Inserisci nome, date di nascita e morte con font, curvatura e colori personalizzabili.</p>
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-n">5</div>
+      <div>
+        <h4>Ordina e traccia</h4>
+        <p>Conferma l'ordine via PayPal, scarica il PDF di approvazione e traccia la spedizione in tempo reale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNZIONALITÀ -->
+<section id="funzionalita" class="features">
+  <div class="sec-tag">Tecnologia integrata</div>
+  <h2>Strumenti <em>intelligenti</em><br>a portata di tap</h2>
+  <p class="sec-text">Funzionalità di intelligenza artificiale per rendere ogni foto perfetta per la stampa su ceramica.</p>
+  <div class="features-grid">
+    <div class="feat">
+      <span class="feat-icon">✦</span>
+      <h4>Migliora immagine AI</h4>
+      <p>Aumenta automaticamente qualità e nitidezza della foto prima della stampa.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">◈</span>
+      <h4>Rimozione sfondo</h4>
+      <p>Elimina lo sfondo originale in un tap e sostituiscilo con quello che preferisci.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">◻</span>
+      <h4>Libreria sfondi</h4>
+      <p>Mare, paesaggi naturali, colori solidi e sfondi personalizzati dalla galleria.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">◑</span>
+      <h4>Stile abbigliamento</h4>
+      <p>Cambia il vestito della persona con un guardaroba digitale integrato nell'app.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">Aa</span>
+      <h4>Testo personalizzato</h4>
+      <p>Nome, date, font, curvatura e colore del testo completamente configurabili.</p>
+    </div>
+    <div class="feat">
+      <span class="feat-icon">↗</span>
+      <h4>Espandi immagine</h4>
+      <p>Adatta la foto al formato del prodotto scelto senza perdita di qualità.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODOTTI -->
+<section id="prodotti" class="products">
+  <div class="sec-tag">I nostri prodotti</div>
+  <h2>Ogni formato,<br>ogni <em>ricordo</em></h2>
+  <p class="sec-text">Dalla fotoceramica classica alle targhe commemorative, una gamma completa per ogni esigenza.</p>
+  <div class="products-list">
+    <div class="product">
+      <div class="product-num">01</div>
+      <div>
+        <span class="product-tag">Bestseller</span>
+        <h3>Fotoceramica Ovale</h3>
+        <p>Il formato classico per le commemorazioni funebri. Disponibile in più dimensioni, con cornice opzionale.</p>
+      </div>
+    </div>
+    <div class="product">
+      <div class="product-num">02</div>
+      <div>
+        <span class="product-tag">Moderno</span>
+        <h3>Fotoceramica Rettangolare</h3>
+        <p>Design contemporaneo senza cornice, bordi rialzati. Perfetta come oggetto d'arredo e ricordo familiare.</p>
+      </div>
+    </div>
+    <div class="product">
+      <div class="product-num">03</div>
+      <div>
+        <span class="product-tag">Versatile</span>
+        <h3>Fotoceramica Quadrata</h3>
+        <p>Formato quadrato elegante, ideale per ritratti singoli o di gruppo. Alta resa cromatica.</p>
+      </div>
+    </div>
+    <div class="product">
+      <div class="product-num">04</div>
+      <div>
+        <span class="product-tag">Professionale</span>
+        <h3>Targhe Commemorative</h3>
+        <p>In porcellana di alta qualità, progettate per uso funerario e commemorativo professionale.</p>
+      </div>
+    </div>
+    <div class="product">
+      <div class="product-num">05</div>
+      <div>
+        <span class="product-tag">Acciaio inox</span>
+        <h3>Stampe su Acciaio</h3>
+        <p>Resistenti alle intemperie, ideali per lapidi e monumenti in esterno. Durata illimitata.</p>
+      </div>
+    </div>
+    <div class="product">
+      <div class="product-num">06</div>
+      <div>
+        <span class="product-tag">Gruppi</span>
+        <h3>Immagine di Gruppo</h3>
+        <p>Composizioni con più persone su un unico prodotto. Perfette per commemorazioni familiari.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDINI -->
+<section id="ordini" class="orders">
+  <div class="sec-tag">Gestione ordini</div>
+  <h2>Traccia ogni ordine<br>in <em>tempo reale</em></h2>
+  <p class="sec-text">Dal momento della conferma alla consegna a domicilio, Kerachrom ti aggiorna su ogni passaggio.</p>
+  <div class="orders-flow">
+    <div class="order-row">
+      <div class="order-dot dot-pending"></div>
+      <div class="order-label">In attesa</div>
+      <div class="order-desc">Ordine ricevuto — PDF di approvazione generato e inviato via email</div>
+    </div>
+    <div class="order-row">
+      <div class="order-dot dot-working"></div>
+      <div class="order-label">In lavorazione</div>
+      <div class="order-desc">Il prodotto è in produzione nel nostro laboratorio</div>
+    </div>
+    <div class="order-row">
+      <div class="order-dot dot-shipped"></div>
+      <div class="order-label">Spedito</div>
+      <div class="order-desc">Il pacco è partito — puoi seguire la spedizione dall'app</div>
+    </div>
+    <div class="order-row">
+      <div class="order-dot dot-done"></div>
+      <div class="order-label">Consegnato</div>
+      <div class="order-desc">Il prodotto è arrivato a destinazione</div>
+    </div>
+  </div>
+</section>
+
+<!-- PER CHI -->
+<section id="per-chi" class="audience">
+  <div class="sec-tag">Per chi è Kerachrom</div>
+  <h2>Una soluzione per<br>ogni <em>esigenza</em></h2>
+  <div class="audience-cards">
+    <div class="aud-card">
+      <span class="aud-tag">Privati</span>
+      <h3>Famiglie e privati</h3>
+      <p>Crea ricordi permanenti dei tuoi cari. Compleanni, anniversari, commemorazioni — ogni momento merita di durare per sempre.</p>
+      <div class="aud-pills">
+        <span class="aud-pill">Facile da usare</span>
+        <span class="aud-pill">Dal telefono</span>
+        <span class="aud-pill">Consegna a casa</span>
+      </div>
+    </div>
+    <div class="aud-card">
+      <span class="aud-tag">Professionisti</span>
+      <h3>Pompe funebri</h3>
+      <p>Offri un servizio digitale premium alle famiglie. Ordini gestiti dall'app, con PDF di approvazione e tracciamento incluso.</p>
+      <div class="aud-pills">
+        <span class="aud-pill">Gestione ordini</span>
+        <span class="aud-pill">PDF approvazione</span>
+        <span class="aud-pill">Account dedicato</span>
+      </div>
+    </div>
+    <div class="aud-card">
+      <span class="aud-tag">Creativi</span>
+      <h3>Fotografi & Studi</h3>
+      <p>Trasforma le tue sessioni fotografiche in prodotti fisici di alta qualità. Un servizio in più per i tuoi clienti.</p>
+      <div class="aud-pills">
+        <span class="aud-pill">Alta risoluzione</span>
+        <span class="aud-pill">Più formati</span>
+        <span class="aud-pill">Branding</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOWNLOAD -->
+<section id="download" class="download">
+  <div class="download-inner">
+    <div class="sec-tag">Disponibile ovunque</div>
+    <h2>Inizia il tuo primo<br>progetto <em>oggi</em></h2>
+    <p class="sec-text">Scarica l'app gratuitamente su iOS e Android, oppure accedi dal browser. Nessuna carta di credito richiesta.</p>
+    <div class="store-btns">
+      <a href="#" class="store-btn">
+        <div class="store-icon">🍎</div>
+        <div class="store-text">
+          <small>Scarica su</small>
+          <strong>App Store</strong>
+        </div>
+      </a>
+      <a href="#" class="store-btn">
+        <div class="store-icon">▶</div>
+        <div class="store-text">
+          <small>Disponibile su</small>
+          <strong>Google Play</strong>
+        </div>
+      </a>
+      <a href="#" class="store-btn">
+        <div class="store-icon">🌐</div>
+        <div class="store-text">
+          <small>Accedi dal</small>
+          <strong>Browser Web</strong>
+        </div>
+      </a>
+    </div>
+    <div class="pricing-note">
+      <b>✦</b> Prezzi a partire da €70 — pagamento sicuro via PayPal
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Kera<span>chrom</span></a>
+  <div class="footer-links">
+    <a href="#">Chi siamo</a>
+    <a href="#">FAQ</a>
+    <a href="#">Traccia ordine</a>
+    <a href="#">Termini e condizioni</a>
+    <a href="#">Privacy</a>
+    <a href="#">Contatti</a>
+  </div>
+  <p>© 2025 Kerachrom Italy®. Tutti i diritti riservati.</p>
+</footer>
+
+</body>
+</html>
